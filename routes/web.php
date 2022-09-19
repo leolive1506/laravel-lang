@@ -20,11 +20,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', function () {
-        \Log::debug(App::getLocale());
-        return view('dashboard');
-    })->middleware(['auth'])->name('dashboard');
-
+    Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
     Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
 });
 
